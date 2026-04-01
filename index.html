@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ViewTube – Watch Anything</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════ -->
+  <header class="navbar" id="navbar">
+    <div class="nav-left">
+      <button class="icon-btn sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <a class="logo" href="#" id="logoLink">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 18" width="32" height="24">
+            <rect x="0" y="0" width="24" height="18" rx="4" fill="#FF0033"/>
+            <polygon points="9,5 18,9 9,13" fill="white"/>
+          </svg>
+          <span class="logo-text">ViewTube</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="nav-center">
+      <div class="search-bar" id="searchBar">
+        <input type="text" id="searchInput" placeholder="Search" autocomplete="off" />
+        <button class="search-btn" id="searchBtn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+        <div class="search-suggestions" id="searchSuggestions"></div>
+      </div>
+      <button class="icon-btn voice-btn" aria-label="Voice search" id="voiceBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          <line x1="12" y1="19" x2="12" y2="23"/>
+          <line x1="8" y1="23" x2="16" y2="23"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="nav-right">
+      <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <button class="upload-btn" id="uploadBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        <span>Upload</span>
+      </button>
+      <button class="icon-btn notif-btn" id="notifBtn" aria-label="Notifications">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+        <span class="badge">9</span>
+      </button>
+      <button class="avatar-btn" id="avatarBtn" aria-label="Profile">
+        <div class="avatar">AK</div>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════
+       SIDEBAR
+  ═══════════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-page="home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span>Home</span>
+      </a>
+      <a href="#" class="nav-item" data-page="shorts">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+          <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+        </svg>
+        <span>Shorts</span>
+      </a>
+      <a href="#" class="nav-item" data-page="subscriptions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span>Subscriptions</span>
+      </a>
+      <div class="nav-divider"></div>
+      <a href="#" class="nav-item" data-page="library">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <span>Library</span>
+      </a>
+      <a href="#" class="nav-item" data-page="history">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 3v5h5"/>
+          <path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/>
+          <path d="M12 7v5l4 2"/>
+        </svg>
+        <span>History</span>
+      </a>
+      <a href="#" class="nav-item" data-page="liked">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        <span>Liked Videos</span>
+      </a>
+      <div class="nav-divider"></div>
+      <p class="nav-label">Subscriptions</p>
+      <a href="#" class="nav-item sub-item">
+        <div class="sub-avatar" style="background:#e53935;">MR</div>
+        <span>MrBeast</span>
+        <span class="live-dot"></span>
+      </a>
+      <a href="#" class="nav-item sub-item">
+        <div class="sub-avatar" style="background:#8e24aa;">LS</div>
+        <span>Linus Tech</span>
+      </a>
+      <a href="#" class="nav-item sub-item">
+        <div class="sub-avatar" style="background:#00897b;">VG</div>
+        <span>Veritasium</span>
+      </a>
+      <a href="#" class="nav-item sub-item">
+        <div class="sub-avatar" style="background:#f4511e;">KS</div>
+        <span>Kurzgesagt</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- ═══════════════════════════════════════
+       MAIN CONTENT PAGES
+  ═══════════════════════════════════════ -->
+  <main class="main-content" id="mainContent">
+
+    <!-- HOME PAGE -->
+    <div class="page active" id="page-home">
+      <div class="category-bar" id="categoryBar">
+        <button class="cat-btn active" data-cat="all">All</button>
+        <button class="cat-btn" data-cat="music">Music</button>
+        <button class="cat-btn" data-cat="gaming">Gaming</button>
+        <button class="cat-btn" data-cat="news">News</button>
+        <button class="cat-btn" data-cat="tech">Tech</button>
+        <button class="cat-btn" data-cat="sports">Sports</button>
+        <button class="cat-btn" data-cat="cooking">Cooking</button>
+        <button class="cat-btn" data-cat="education">Education</button>
+        <button class="cat-btn" data-cat="travel">Travel</button>
+        <button class="cat-btn" data-cat="comedy">Comedy</button>
+      </div>
+      <div class="video-grid" id="videoGrid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- SHORTS PAGE -->
+    <div class="page" id="page-shorts">
+      <div class="shorts-container" id="shortsContainer">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- SUBSCRIPTIONS / LIBRARY / HISTORY / LIKED -->
+    <div class="page" id="page-subscriptions">
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <h2>Don't miss new videos</h2>
+        <p>Sign in to see updates from your favorite channels</p>
+        <button class="primary-btn" id="signInBtnSubs">Sign In</button>
+      </div>
+    </div>
+
+    <div class="page" id="page-library">
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <h2>Your library is empty</h2>
+        <p>Videos you save will appear here</p>
+      </div>
+    </div>
+
+    <div class="page" id="page-history">
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 3v5h5"/>
+          <path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/>
+          <path d="M12 7v5l4 2"/>
+        </svg>
+        <h2>Watch history is off</h2>
+        <p>Your watch history is empty right now</p>
+      </div>
+    </div>
+
+    <div class="page" id="page-liked">
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        <h2>No liked videos yet</h2>
+        <p>Videos you like will appear here</p>
+      </div>
+    </div>
+
+    <!-- VIDEO PLAYER PAGE -->
+    <div class="page" id="page-player">
+      <div class="player-layout">
+        <div class="player-main">
+          <!-- Video -->
+          <div class="video-wrapper" id="videoWrapper">
+            <div class="video-player-container" id="videoPlayerContainer">
+              <div class="video-placeholder" id="videoPlaceholder">
+                <div class="play-overlay" id="playOverlay">
+                  <button class="big-play-btn" id="bigPlayBtn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                  </button>
+                </div>
+                <img class="video-thumb-full" id="videoThumbFull" src="" alt="" />
+                <div class="video-controls" id="videoControls">
+                  <div class="progress-bar-wrap" id="progressBarWrap">
+                    <div class="progress-bar" id="progressBar">
+                      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+                      <div class="progress-thumb" id="progressThumb" style="left:0%"></div>
+                    </div>
+                  </div>
+                  <div class="controls-row">
+                    <div class="controls-left">
+                      <button class="ctrl-btn" id="playPauseBtn">
+                        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                      </button>
+                      <button class="ctrl-btn" id="skipBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polygon points="5 4 15 12 5 20 5 4"/>
+                          <line x1="19" y1="5" x2="19" y2="19"/>
+                        </svg>
+                      </button>
+                      <div class="volume-wrap">
+                        <button class="ctrl-btn" id="volBtn">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                          </svg>
+                        </button>
+                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="80" />
+                      </div>
+                      <span class="time-display" id="timeDisplay">0:00 / 10:32</span>
+                    </div>
+                    <div class="controls-right">
+                      <button class="ctrl-btn" id="subtitlesBtn">CC</button>
+                      <button class="ctrl-btn" id="settingsBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="3"/>
+                          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>
+                      </button>
+                      <button class="ctrl-btn" id="pipBtn" title="Mini Player (i)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <rect x="2" y="3" width="20" height="14" rx="2"/>
+                          <rect x="12" y="11" width="8" height="6" rx="1"/>
+                        </svg>
+                      </button>
+                      <button class="ctrl-btn" id="fullscreenBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="15 3 21 3 21 9"/>
+                          <polyline points="9 21 3 21 3 15"/>
+                          <line x1="21" y1="3" x2="14" y2="10"/>
+                          <line x1="3" y1="21" x2="10" y2="14"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Info -->
+          <div class="video-info" id="videoInfo">
+            <h1 class="video-title-full" id="videoTitleFull"></h1>
+            <div class="video-meta-row">
+              <div class="video-stats">
+                <span id="videoViewsFull"></span>
+                <span class="dot">·</span>
+                <span id="videoDateFull"></span>
+              </div>
+              <div class="video-actions">
+                <button class="action-btn like-btn" id="likeBtn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                  </svg>
+                  <span id="likeCount">24K</span>
+                </button>
+                <button class="action-btn dislike-btn" id="dislikeBtn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/>
+                  </svg>
+                  <span>Dislike</span>
+                </button>
+                <button class="action-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                    <polyline points="16 6 12 2 8 6"/>
+                    <line x1="12" y1="2" x2="12" y2="15"/>
+                  </svg>
+                  <span>Share</span>
+                </button>
+                <button class="action-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                  </svg>
+                  <span>Save</span>
+                </button>
+                <button class="action-btn icon-only">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Channel Info -->
+            <div class="channel-info-row">
+              <div class="channel-left">
+                <div class="channel-avatar-lg" id="channelAvatarPlayer"></div>
+                <div class="channel-text">
+                  <span class="channel-name-lg" id="channelNamePlayer"></span>
+                  <span class="subscriber-count" id="subscriberCount"></span>
+                </div>
+              </div>
+              <button class="subscribe-btn" id="subscribeBtn">Subscribe</button>
+            </div>
+
+            <!-- Description -->
+            <div class="description-box" id="descriptionBox">
+              <div class="desc-content" id="descContent"></div>
+              <button class="show-more-btn" id="showMoreBtn">Show more</button>
+            </div>
+          </div>
+
+          <!-- Comments -->
+          <div class="comments-section" id="commentsSection">
+            <div class="comments-header">
+              <h3 id="commentCount">128 Comments</h3>
+              <button class="sort-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="8" y1="6" x2="21" y2="6"/>
+                  <line x1="8" y1="12" x2="21" y2="12"/>
+                  <line x1="8" y1="18" x2="21" y2="18"/>
+                  <line x1="3" y1="6" x2="3.01" y2="6"/>
+                  <line x1="3" y1="12" x2="3.01" y2="12"/>
+                  <line x1="3" y1="18" x2="3.01" y2="18"/>
+                </svg>
+                Sort by
+              </button>
+            </div>
+            <div class="add-comment">
+              <div class="avatar small">AK</div>
+              <input type="text" class="comment-input" placeholder="Add a comment..." id="commentInput" />
+            </div>
+            <div class="comments-list" id="commentsList">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Suggested Videos Sidebar -->
+        <aside class="suggested-sidebar" id="suggestedSidebar">
+          <div class="suggested-list" id="suggestedList">
+            <!-- Populated by JS -->
+          </div>
+        </aside>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════
+       MINI PLAYER
+  ═══════════════════════════════════════ -->
+  <div class="mini-player" id="miniPlayer">
+    <div class="mini-thumb-wrap">
+      <img class="mini-thumb" id="miniThumb" src="" alt="" />
+    </div>
+    <div class="mini-info">
+      <p class="mini-title" id="miniTitle"></p>
+      <p class="mini-channel" id="miniChannel"></p>
+    </div>
+    <div class="mini-controls">
+      <button class="mini-play-btn" id="miniPlayBtn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+      <button class="mini-close-btn" id="miniCloseBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       LOGIN MODAL
+  ═══════════════════════════════════════ -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="loginModal">
+      <button class="modal-close" id="modalClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <div class="modal-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 18" width="32" height="24">
+            <rect x="0" y="0" width="24" height="18" rx="4" fill="#FF0033"/>
+            <polygon points="9,5 18,9 9,13" fill="white"/>
+          </svg>
+          <span class="logo-text">ViewTube</span>
+        </div>
+      </div>
+      <h2>Sign in</h2>
+      <p>to continue to ViewTube</p>
+      <div class="form-group">
+        <label>Email or phone</label>
+        <input type="email" placeholder="john@example.com" class="form-input" id="emailInput" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password" class="form-input" id="passInput" />
+      </div>
+      <div class="form-links">
+        <a href="#">Forgot password?</a>
+      </div>
+      <button class="primary-btn full-width" id="loginSubmit">Sign In</button>
+      <div class="modal-divider"><span>or</span></div>
+      <button class="google-btn">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        Continue with Google
+      </button>
+      <p class="modal-footer">Don't have an account? <a href="#">Create account</a></p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       TOAST NOTIFICATION
+  ═══════════════════════════════════════ -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Keyboard Shortcuts Hint -->
+  <div class="shortcuts-modal" id="shortcutsModal">
+    <div class="shortcuts-inner">
+      <h3>Keyboard Shortcuts</h3>
+      <button class="modal-close" id="shortcutsClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <div class="shortcut-grid">
+        <div class="shortcut-item"><kbd>K</kbd><span>Play / Pause</span></div>
+        <div class="shortcut-item"><kbd>M</kbd><span>Mute</span></div>
+        <div class="shortcut-item"><kbd>F</kbd><span>Fullscreen</span></div>
+        <div class="shortcut-item"><kbd>I</kbd><span>Mini Player</span></div>
+        <div class="shortcut-item"><kbd>T</kbd><span>Toggle Theme</span></div>
+        <div class="shortcut-item"><kbd>/</kbd><span>Search Focus</span></div>
+        <div class="shortcut-item"><kbd>?</kbd><span>Shortcuts</span></div>
+        <div class="shortcut-item"><kbd>ESC</kbd><span>Close / Back</span></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
